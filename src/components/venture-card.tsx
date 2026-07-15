@@ -34,129 +34,124 @@ function VentureCardComponent({
   const [showImages, setShowImages] = useState(false);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
   const hasImages = images && images.length > 0;
+  const hasExpandable = (description?.length ?? 0) > 0 || hasImages;
+
+  const toggleExpand = () => {
+    if (hasExpandable) {
+      setShowImages((prev) => !prev);
+    }
+  };
 
   const handleImageError = (src: string) => {
-    setFailedImages(prev => new Set(prev).add(src));
+    setFailedImages((prev) => {
+      const next = new Set(prev);
+      next.add(src);
+      return next;
+    });
   };
 
   return (
-    <li className="relative ml-10 py-4">
+    <li
+      className={cn(
+        "relative ml-10 py-4 group",
+        hasExpandable ? "cursor-pointer" : "cursor-default"
+      )}
+      onClick={toggleExpand}
+      role={hasExpandable ? "button" : undefined}
+      tabIndex={hasExpandable ? 0 : undefined}
+      onKeyDown={(e) => {
+        if (hasExpandable && (e.key === "Enter" || e.key === " ")) {
+          e.preventDefault();
+          toggleExpand();
+        }
+      }}
+    >
       <div className="absolute -left-16 top-2 flex items-center justify-center rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-[var(--glass-shadow)]">
-        <button
-          type="button"
-          onClick={() => hasImages && setShowImages((prev) => !prev)}
-          className={cn(
-            "rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary",
-            hasImages ? "cursor-pointer" : "cursor-default"
-          )}
-          aria-expanded={showImages}
-          aria-label={hasImages ? `Toggle ${title} images` : title}
-        >
-          <Avatar className="border border-[var(--glass-border)] size-12 m-auto">
-            <AvatarImage src={image} alt={`${title} logo`} className="object-contain" />
-            <AvatarFallback aria-label={title}>{title[0]}</AvatarFallback>
-          </Avatar>
-        </button>
+        <Avatar className="border border-[var(--glass-border)] size-12 m-auto">
+          <AvatarImage src={image} alt={`${title} logo`} className="object-contain" />
+          <AvatarFallback aria-label={title}>{title[0]}</AvatarFallback>
+        </Avatar>
       </div>
       <div className="flex flex-1 flex-col justify-start gap-1">
-        <button
-          type="button"
-          onClick={() => hasImages && setShowImages((prev) => !prev)}
-          onKeyDown={(e) => {
-            if (hasImages && (e.key === 'Enter' || e.key === ' ')) {
-              e.preventDefault();
-              setShowImages((prev) => !prev);
-            }
-          }}
-          className={cn(
-            "flex flex-col justify-start gap-1 text-left -ml-1 rounded px-1 group w-full",
-            hasImages
-              ? "cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
-              : "cursor-default"
+        {dates && (
+          <time className="text-xs text-muted-foreground">{dates}</time>
+        )}
+        <div className="inline-flex items-center gap-1.5 font-semibold leading-none">
+          {title}
+          {hasExpandable && (
+            <ChevronRight
+              className={cn(
+                "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
+                showImages ? "rotate-90" : "rotate-0"
+              )}
+            />
           )}
-          aria-expanded={showImages}
-          aria-controls={`${title}-images`}
-          aria-label={hasImages ? `Toggle ${title} images` : title}
-        >
-          {dates && (
-            <time className="text-xs text-muted-foreground">{dates}</time>
-          )}
-          <div className="inline-flex items-center gap-1.5 font-semibold leading-none">
-            {title}
-            {hasImages && (
-              <ChevronRight
-                className={cn(
-                  "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
-                  showImages ? "rotate-90" : "rotate-0"
-                )}
-              />
-            )}
-          </div>
-          {location && (
-            <p className="text-sm text-muted-foreground">{location}</p>
-          )}
-          {showImages && description && (
-            <span className="prose dark:prose-invert text-sm text-muted-foreground">
-              {description}
-            </span>
-          )}
-        </button>
-      </div>
-      <AnimatePresence initial={false}>
-        {hasImages && showImages && (
+        </div>
+        {location && (
+          <p className="text-sm text-muted-foreground">{location}</p>
+        )}
+        {hasExpandable && (
           <motion.div
-            id={`${title}-images`}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-3 overflow-hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{
+              opacity: showImages ? 1 : 0,
+              height: showImages ? "auto" : 0,
+            }}
+            transition={{
+              duration: 0.7,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="mt-3 overflow-hidden text-left"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="grid grid-cols-2 gap-2">
-              {images!.map((src, idx) => (
-                !failedImages.has(src) && (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: idx * 0.05,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className="block aspect-video rounded-[var(--radius)] border border-[var(--glass-border)] overflow-hidden bg-muted/50 w-full"
-                    role="img"
-                    aria-label={`${title} image ${idx + 1}`}
-                  >
-                    <img
-                      src={src}
-                      alt={`${title} portfolio image ${idx + 1}`}
-                      width={640}
-                      height={360}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                      onError={() => handleImageError(src)}
-                    />
-                  </motion.div>
-                )
-              ))}
-            </div>
+            {description && (
+              <span className="prose dark:prose-invert text-sm text-muted-foreground block mb-3">
+                {description}
+              </span>
+            )}
+            {hasImages && (
+              <div className="grid grid-cols-2 gap-2 mt-2">
+                {images!.map((src, idx) => (
+                  !failedImages.has(src) && (
+                    <div
+                      key={idx}
+                      className="block aspect-video rounded-[var(--radius)] border border-[var(--glass-border)] overflow-hidden bg-muted/50 w-full"
+                      role="img"
+                      aria-label={`${title} image ${idx + 1}`}
+                    >
+                      <img
+                        src={src}
+                        alt={`${title} portfolio image ${idx + 1}`}
+                        width={640}
+                        height={360}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                        onError={() => handleImageError(src)}
+                      />
+                    </div>
+                  )
+                ))}
+              </div>
+            )}
           </motion.div>
         )}
-      </AnimatePresence>
-      {links && links.length > 0 && (
-        <div className="mt-2 flex flex-row flex-wrap items-start gap-2">
-          {links?.map((link, idx) => (
-            <Link href={link.href} key={idx}>
-              <Badge key={idx} title={link.title} className="flex gap-2">
-                {link.icon}
-                {link.title}
-              </Badge>
-            </Link>
-          ))}
-        </div>
-      )}
+        {links && links.length > 0 && (
+          <div
+            className="mt-2 flex flex-row flex-wrap items-start gap-2"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {links?.map((link, idx) => (
+              <Link href={link.href} key={idx}>
+                <Badge key={idx} title={link.title} className="flex gap-2">
+                  {link.icon}
+                  {link.title}
+                </Badge>
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
     </li>
   );
 }

@@ -111,7 +111,7 @@ const ResumeCardComponent = ({
               className="mt-2 overflow-hidden"
             >
               {description && (
-                <p className="text-xs sm:text-sm mb-3">{description}</p>
+                <p className="text-xs sm:text-sm mb-3 whitespace-pre-line text-muted-foreground">{description}</p>
               )}
               {images && images.length > 0 && (
                 <div className="grid grid-cols-2 gap-2 mt-2">

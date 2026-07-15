@@ -18,10 +18,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
-    default: DATA.name + " – DevOps, Cloud & AI/ML Engineer",
-    template: `%s | ${DATA.name} – DevOps/Cloud/AI-ML`,
+    default: "Ravindu Danthanarayana | Digital Resume",
+    template: `%s | Ravindu Danthanarayana | Digital Resume`,
   },
-  description: DATA.description,
+  description: DATA.descriptionRaw,
   keywords: [
     "Ravindu Danthanarayana",
     "Ravindu Cloud",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `${DATA.name}`,
-    description: DATA.description,
+    description: DATA.descriptionRaw,
     url: DATA.url,
     siteName: `${DATA.name}`,
     locale: "en_US",
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: `${DATA.name}`,
-    description: DATA.description,
+    description: DATA.descriptionRaw,
     card: "summary_large_image",
     images: [DATA.avatarUrl],
   },

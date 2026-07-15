@@ -71,38 +71,38 @@ export default function Page() {
             <h2 className="text-xl font-bold">Skills</h2>
           </BlurFade>
           <div className="flex flex-wrap gap-1">
-{[
-  'Java',
-  'Python',
-  'JavaScript',
-  'TypeScript',
-  'React',
-  'Node.js',
-  'Express.js',
-  'REST APIs',
-  'OOP',
-  'Data Structures & Algorithms',
-  'SDLC',
-  'Git',
-  'GitHub',
-  'SQL',
-  'MySQL',
-  'RDBMS',
-  'Docker',
-  'Kubernetes',
-  'CI/CD',
-  'Jenkins',
-  'GitHub Actions',
-  'Terraform',
-  'AWS',
-  'Azure',
-  'Linux',
-  'Bash',
-  'Microservices',
-  'Prometheus',
-  'Grafana'
-].map((skill, id) => (
-  <BlurFade key={skill} delay={BLUR_FADE_DELAY * 6 + id * 0.05}>                <Badge key={skill} variant="blue">{skill}</Badge>
+            {[
+              'Java',
+              'Python',
+              'JavaScript',
+              'TypeScript',
+              'React',
+              'Node.js',
+              'Express.js',
+              'REST APIs',
+              'OOP',
+              'Data Structures & Algorithms',
+              'SDLC',
+              'Git',
+              'GitHub',
+              'SQL',
+              'MySQL',
+              'RDBMS',
+              'Docker',
+              'Kubernetes',
+              'CI/CD',
+              'Jenkins',
+              'GitHub Actions',
+              'Terraform',
+              'AWS',
+              'Azure',
+              'Linux',
+              'Bash',
+              'Microservices',
+              'Prometheus',
+              'Grafana'
+            ].map((skill, id) => (
+              <BlurFade key={skill} delay={BLUR_FADE_DELAY * 6 + id * 0.05}>                <Badge key={skill} variant="blue">{skill}</Badge>
               </BlurFade>
             ))}
           </div>

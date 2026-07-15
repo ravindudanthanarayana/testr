@@ -12,6 +12,32 @@ const BLUR_FADE_DELAY = 0.04;
 export default function HomeBelowFold() {
   return (
     <>
+      <section id="experience">
+        <div className="flex min-h-0 flex-col gap-y-3">
+          <BlurFade delay={BLUR_FADE_DELAY * 5}>
+            <h2 className="text-xl font-bold">Experience</h2>
+          </BlurFade>
+          {DATA.experience.map((experience, id) => (
+            <BlurFade
+              key={experience.school}
+              delay={BLUR_FADE_DELAY * 6 + id * 0.05}
+            >
+              <ResumeCard
+                key={experience.school}
+                href={experience.href}
+                logoUrl={experience.logoUrl}
+                altText={experience.school}
+                title={experience.school}
+                subtitle={experience.degree}
+                period={`${experience.start} - ${experience.end}`}
+                description={experience.description}
+                images={experience.images}
+              />
+            </BlurFade>
+          ))}
+        </div>
+      </section>
+
       <section id="projects">
         <div className="space-y-6 sm:space-y-12 w-full py-6 sm:py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>

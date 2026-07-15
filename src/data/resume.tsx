@@ -6,11 +6,15 @@ export const DATA = {
   url: "https://ravindu.cloud",
   location: "San Francisco, CA",
   locationLink: "https://www.google.com/maps/place/sanfrancisco",
-  description:
-    "Building software that scales • Solving real world problems • Creating meaningful impact",
+  description: (
+    <>
+      Turning "<span className="text-red-600 font-semibold">What if?</span>" into "<span className="text-green-600 font-bold">Done✓</span>"
+    </>
+  ),
+  descriptionRaw: "    Turning “What if?” into “Done✓”",
   cvUrl: "/RAVINDU_DANTHANARAYANA_RESUME_2026_v2.5.pdf",
   summary:
-    "Driven **3rd year undergraduate** with a strong passion for **Software Engineering, DevSecOps, Cloud, and AI/ML**, who enjoys building smart, reliable and scalable systems. I enjoy learning new technologies, working in team oriented environments and turning ideas into reality. **Currently seeking an internship** where I can learn, contribute and help build meaningful, high impact solutions.",
+    "Driven **3rd year undergraduate** specializing in **Artificial Intelligence** with a strong passion for **Software Engineering, DevSecOps, Cloud, and AI/ML**. I enjoy building smart, reliable, and scalable systems, learning new technologies, collaborating in team oriented environments, and turning ideas into reality. **Passionate about solving real world problems** and continuously growing as an engineer.",
   avatarUrl: "/ravindu-dp.svg",
   skills: [
     "React",
@@ -114,12 +118,27 @@ export const DATA = {
     // },
 
   ],
+  experience: [
+    {
+      school: "WSO2",
+      href: "https://wso2.com/",
+      degree: "Intern - Software Engineering",
+      description: undefined,
+      // description: "➥ Working on enterprise software engineering at WSO2, contributing to building scalable and reliable middleware solutions.\n➥ Collaborating with cross-functional teams to design, develop, and test integration features.\n➥ Contributing to open-source middleware technologies and cloud services.",
+      logoUrl: "/wso2_logo.svg",
+      start: "JUL 2026",
+      end: "Present",
+      images: [
+        "/wso21.jpeg",
+      ],
+    },
+  ],
   education: [
     {
       school: "SLIIT",
       href: "https://www.sliit.lk/",
       degree: "BSc(Hons) in IT Specialising in Artificial Intelligence(UG)",
-      logoUrl: "/sliit.svg",
+      logoUrl: "/sliit-logo.svg",
       start: "2023",
       end: "Present",
       images: [
@@ -147,7 +166,7 @@ export const DATA = {
       school: "Dharmaraja College",
       href: "https://www.dharmaraja.lk/",
       degree: "GCE(A/L)",
-      logoUrl: "/drck.svg",
+      logoUrl: "/drck-logo.svg",
       start: "2010",
       end: "2023",
       images: [
@@ -162,7 +181,7 @@ export const DATA = {
   ],
   certifications: [
     {
-      name: "Kubernetes & C loud Native Security Associate(KCSA)|CNCF",
+      name: "Kubernetes & Cloud Native Security Associate(KCSA)|CNCF",
       issuer: "The Linux Foundation",
       date: "2026",
       logoUrl: "/kcsa.svg",
@@ -175,19 +194,19 @@ export const DATA = {
       logoUrl: "/kcna.svg",
       link: "https://www.credly.com/badges/7252b027-2513-4ca0-addb-1273ebf6cae4/public_url"
     },
-        {
+    {
       name: "AWS Certified AI Practitioner (AIF-C01)",
-      issuer: "The Linux Foundation",
+      issuer: "Amazon Web Services (AWS)",
       date: "2026",
       logoUrl: "/aap.svg",
       link: "https://www.credly.com/badges/d2ecc6cd-6d67-41b7-a6d7-963f5a133197/public_url"
     },
-        {
+    {
       name: "AWS Certified Cloud Practitioner (CLF-C02)",
-      issuer: "The Linux Foundation",
+      issuer: "Amazon Web Services (AWS)",
       date: "2026",
       logoUrl: "/acp.svg",
-      link: "https://www.credly.com/badges/7252b027-2513-4ca0-addb-1273ebf6cae4/public_url"
+      link: "https://www.credly.com/badges/be4352ce-d699-4b50-93a1-2596364a6066/public_url"
     },
     {
       name: "FinOps Certified Practitioner",
@@ -226,7 +245,7 @@ export const DATA = {
     },
     {
       name: "AWS Well Architected Proficient",
-      issuer: "AWS",
+      issuer: "Amazon Web Services (AWS)",
       date: "2025",
       logoUrl: "/awsse.svg",
       link: "https://www.credly.com/badges/fd7a5614-ecc7-4514-ae30-1a2e6b4aae91"

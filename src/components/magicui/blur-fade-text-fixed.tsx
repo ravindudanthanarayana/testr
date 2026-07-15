@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { motion, Variants } from "framer-motion";
 
 interface BlurFadeTextProps {
-  text: string;
+  text: React.ReactNode;
   className?: string;
   variant?: {
     hidden: { y: number };
@@ -32,7 +32,7 @@ const BlurFadeText = ({
   };
   const combinedVariants = variant || defaultVariants;
 
-  if (animateByCharacter) {
+  if (animateByCharacter && typeof text === "string") {
     const characters = Array.from(text);
     return (
       <div className="flex">
