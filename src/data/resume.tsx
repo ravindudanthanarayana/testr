@@ -8,7 +8,7 @@ export const DATA = {
   locationLink: "https://www.google.com/maps/place/sanfrancisco",
   description: (
     <>
-      Turning "<span className="text-red-600 font-semibold">What if?</span>" into "<span className="text-green-600 font-bold">Done✓</span>"
+      Turning &quot;<span className="text-red-600 font-semibold">What if?</span>&quot; into &quot;<span className="text-green-600 font-bold">Done✓</span>&quot;
     </>
   ),
   descriptionRaw: "    Turning “What if?” into “Done✓”",

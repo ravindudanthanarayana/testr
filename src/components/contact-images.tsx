@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 const IMAGES = [
   "/koo1.png",
@@ -60,13 +61,11 @@ export function ContactImages() {
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
               className="overflow-hidden rounded-[var(--radius)] border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-[var(--glass-shadow)] transition-all duration-smooth group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] group-hover:-translate-y-1 aspect-video"
             >
-              <img
+              <Image
                 src={src}
                 alt={`Ravindu Danthanarayana contact screenshot ${idx + 1}`}
                 width={640}
                 height={360}
-                loading="lazy"
-                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </motion.div>

@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { ChevronRightIcon } from "lucide-react";
 import React from "react";
+import Image from "next/image";
 
 interface ResumeCardProps {
   logoUrl: string;
@@ -122,14 +123,12 @@ const ResumeCardComponent = ({
                       role="img"
                       aria-label={`${title} image ${idx + 1} of ${images.length}`}
                     >
-                      <img
+                      <Image
                         src={src}
                         alt={`${title} showcase image ${idx + 1}`}
                         width={640}
                         height={360}
                         className="w-full h-full object-cover"
-                        loading="lazy"
-                        decoding="async"
                       />
                     </div>
                   ))}

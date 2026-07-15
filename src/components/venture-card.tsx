@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -119,14 +120,12 @@ function VentureCardComponent({
                       role="img"
                       aria-label={`${title} image ${idx + 1}`}
                     >
-                      <img
+                      <Image
                         src={src}
                         alt={`${title} portfolio image ${idx + 1}`}
                         width={640}
                         height={360}
                         className="w-full h-full object-cover"
-                        loading="lazy"
-                        decoding="async"
                         onError={() => handleImageError(src)}
                       />
                     </div>
