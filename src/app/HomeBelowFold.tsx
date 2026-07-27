@@ -31,6 +31,7 @@ export default function HomeBelowFold() {
                 subtitle={experience.degree}
                 period={`${experience.start} - ${experience.end}`}
                 description={experience.description}
+                technologies={experience.technologies}
                 images={experience.images}
               />
             </BlurFade>

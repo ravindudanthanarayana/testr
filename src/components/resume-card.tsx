@@ -18,6 +18,7 @@ interface ResumeCardProps {
   badges?: readonly string[];
   period: string;
   description?: string;
+  technologies?: readonly string[];
   images?: readonly string[];
 }
 const ResumeCardComponent = ({
@@ -29,10 +30,11 @@ const ResumeCardComponent = ({
   badges,
   period,
   description,
+  technologies,
   images,
 }: ResumeCardProps) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
-  const hasExpandable = (description?.length ?? 0) > 0 || (images?.length ?? 0) > 0;
+  const hasExpandable = (description?.length ?? 0) > 0 || (technologies?.length ?? 0) > 0 || (images?.length ?? 0) > 0;
 
   const handleClick = () => {
     if (hasExpandable) {
@@ -98,7 +100,7 @@ const ResumeCardComponent = ({
             </div>
             {subtitle && <div className="font-sans text-xs">{subtitle}</div>}
           </CardHeader>
-          {(description || (images && images.length > 0)) && (
+          {(description || (technologies && technologies.length > 0) || (images && images.length > 0)) && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{
@@ -113,6 +115,15 @@ const ResumeCardComponent = ({
             >
               {description && (
                 <p className="text-xs sm:text-sm mb-3 whitespace-pre-line text-muted-foreground">{description}</p>
+              )}
+              {technologies && technologies.length > 0 && (
+                <div className="mt-2 mb-3 flex flex-wrap gap-1">
+                  {technologies.map((tech, idx) => (
+                    <Badge key={idx} variant="orange">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
               )}
               {images && images.length > 0 && (
                 <div className="grid grid-cols-2 gap-2 mt-2">
